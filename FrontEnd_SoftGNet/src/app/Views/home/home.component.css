@@ -1,0 +1,10 @@
+.background {
+    background: url("/assets/backgroundLogin.jpeg") no-repeat center;
+    height: 100vh;
+    min-height: 500px;
+    background-size: cover;
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

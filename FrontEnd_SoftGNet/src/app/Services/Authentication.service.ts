@@ -29,6 +29,7 @@ export class AuthenticationService {
   login(data : User) {
     return this.http.post<User>(`${this.routeAPI}/Authentication/login`, data).pipe(map(user => {
       localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem('token', JSON.stringify(user.token));
       this.userSubject.next(user);
       return user;
     }));

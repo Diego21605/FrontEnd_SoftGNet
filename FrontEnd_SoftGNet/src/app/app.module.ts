@@ -20,6 +20,15 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ToastModule } from 'primeng/toast';
 import { HomeComponent } from './Views/home/home.component';
 import { SideBarComponent } from './Views/sideBar/sideBar.component';
+import { MegaMenuModule } from 'primeng/megamenu';
+import { ManageDriversComponent } from './Views/ManageDrivers/ManageDrivers.component';
+import { ManageRoutesComponent } from './Views/ManageRoutes/ManageRoutes.component';
+import { ManageSchedulerComponent } from './Views/ManageScheduler/ManageScheduler.component';
+import { ManageVehiculesComponent } from './Views/ManageVehicules/ManageVehicules.component';
+import { CardModule } from 'primeng/card';
+import { ToolbarModule } from 'primeng/toolbar';
+import { TableModule } from 'primeng/table';
+import { DialogModule } from 'primeng/dialog';
 
 @NgModule({
   declarations: [
@@ -27,6 +36,10 @@ import { SideBarComponent } from './Views/sideBar/sideBar.component';
     LoginComponent,
     SideBarComponent,
     HomeComponent,
+    ManageDriversComponent,
+    ManageRoutesComponent,
+    ManageSchedulerComponent,
+    ManageVehiculesComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,7 +56,12 @@ import { SideBarComponent } from './Views/sideBar/sideBar.component';
     InputNumberModule,
     PasswordModule,
     ToastModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    MegaMenuModule,
+    CardModule,
+    ToolbarModule,
+    TableModule,
+    DialogModule,
   ],
   providers: [
     MessageService,
