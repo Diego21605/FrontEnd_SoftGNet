@@ -1,0 +1,42 @@
+<p-toast position="center" [preventOpenDuplicates]="true"></p-toast>
+
+<div class="d-flex justify-content-center overlay" *ngIf="load">
+    <div style="margin: auto;">
+      <p-progressSpinner></p-progressSpinner>
+    </div>
+</div>
+
+<div class="background">
+    <form [formGroup]="formLogin" (ngSubmit)="sendDataLogin()">
+        <div class="container-fluid">
+            <div class="containerLogin">
+                <div class="mb-3">
+                    <h4 class="title"><i class="pi pi-sign-in"></i> Accede a tu cuenta</h4>
+                </div>
+
+                <!-- User -->
+                <div class="col-md mb">
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon">
+                            <i class="pi pi-user"></i>
+                        </span>
+                        <input formControlName="email" pInputText placeholder="Correo" required/>
+                    </div>
+                </div>
+
+                <!-- Pass -->
+                <div class="col-md mb">
+                    <span class="p-float-label">
+                        <p-password formControlName="password" [feedback]="false" id="pass" [toggleMask]="true"></p-password>
+                        <label for="pass">Contraseña</label>
+                    </span>
+                </div>
+
+                <!-- Boton -->
+                <div class="d-grid gap-2 mb-3">
+                    <button pButton pRipple label="Ingresar" type="submit" [disabled]="formLogin.invalid || load" icon="pi pi-check" class="p-button-info"></button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
