@@ -35,7 +35,7 @@
             <tr>
                 <th rowspan="2">#</th>
                 <th><input pInputText type="text" style="width: 100%;" (input)="filterData($event, 'id')"></th>
-                <th><input pInputText type="text" style="width: 100%;" (input)="filterData($event, 'descripcion')"></th>
+                <th><input pInputText type="text" style="width: 100%;" (input)="filterData($event, 'description')"></th>
                 <th><input pInputText type="text" style="width: 100%;" (input)="filterData($event, 'year')"></th>
                 <th><input pInputText type="text" style="width: 100%;" (input)="filterData($event, 'make')"></th>
                 <th><input pInputText type="text" style="width: 100%;" (input)="filterData($event, 'capacity')"></th>
@@ -55,7 +55,7 @@
             <tr>
                 <td>{{rowIndex + 1}}</td>
                 <td>{{data.id}}</td>
-                <td>{{data.descripcion | uppercase}}</td>
+                <td>{{data.description | uppercase}}</td>
                 <td>{{data.year | number: '1.2-2'}}</td>
                 <td>{{data.make | number: '1.2-2'}}</td>
                 <td>{{data.capacity | number: '1.2-2'}}</td>
@@ -81,7 +81,7 @@
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
                     <span class="p-float-label">
-                        <input pInputText formControlName="descripcion" id="name"/>
+                        <input pInputText formControlName="description" id="name"/>
                         <label id="name">Descripción</label>
                     </span>
                 </div>

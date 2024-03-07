@@ -40,7 +40,7 @@ export class ManageRtsComponent implements OnInit {
   initForm() {
     this.formRoute = this.frmBuilder.group({
       id: [null],
-      descripcion: [null, Validators.required],
+      description: [null, Validators.required],
       driver_Id: [null, Validators.required],
       vehicle_Id: [null, Validators.required],
       active: [null, Validators.required],
@@ -75,7 +75,7 @@ export class ManageRtsComponent implements OnInit {
     if (data) {
       this.formRoute.patchValue({
         id: data.id,
-        descripcion: data.descripcion,
+        description: data.description,
         driver_Id: data.driver_Id,
         vehicle_Id: data.vehicle_Id,
         active: data.active == true ? 1 : 0,
@@ -92,7 +92,7 @@ export class ManageRtsComponent implements OnInit {
   createRoute() {
     this.load = true;
     let dataRoute: Routes = {
-      descripcion: this.formRoute.value.descripcion,
+      description: this.formRoute.value.description,
       driver_Id: this.formRoute.value.driver_Id,
       vehicle_Id: this.formRoute.value.vehicle_Id,
       active: this.formRoute.value.active == 1 ? true : false,
@@ -112,7 +112,7 @@ export class ManageRtsComponent implements OnInit {
     this.load = true;
     let dataRoute: Routes = {
       id: this.formRoute.value.id,
-      descripcion: this.formRoute.value.descripcion,
+      description: this.formRoute.value.description,
       driver_Id: this.formRoute.value.driver_Id,
       vehicle_Id: this.formRoute.value.vehicle_Id,
       active: this.formRoute.value.active == 1 ? true : false,
@@ -133,10 +133,10 @@ export class ManageRtsComponent implements OnInit {
   deleteRoute(id: number) {
     this.load = true;
     this.routesService.deleteRoute(id).subscribe(() => {
-      this.msg.sucess(`¡Se ha elimado el conductor!`);
+      this.msg.sucess(`¡Se ha elimado la ruta!`);
       setTimeout(() => this.getRoutesVehicles(), 1000);
     }, (error: HttpErrorResponse) => {
-      this.msg.errorHttp(`¡Ocurrió un error al eliminar el condutor!`, error);
+      this.msg.errorHttp(`¡Ocurrió un error al eliminar la ruta!`, error);
       this.load = false;
     });
   }

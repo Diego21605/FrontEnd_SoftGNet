@@ -19,16 +19,16 @@ export class RoutesService {
 
   getRouteById = (id: number): Observable<any> => this.http.get<any>(`${this.routeAPI}/RoutesVehicles/${id}`);
 
-  createRoute = (Route: Routes) => this.http.post(`${this.routeAPI}/RoutesVehicles`, Route);
+  createRoute = (route: Routes) => this.http.post(`${this.routeAPI}/RoutesVehicles`, route);
 
-  editRoute = (id: number, Route: Routes) => this.http.put(`${this.routeAPI}/RoutesVehicles/${id}`, Route);
+  editRoute = (id: number, route: Routes) => this.http.put(`${this.routeAPI}/RoutesVehicles/${id}`, route);
 
   deleteRoute = (id: number) => this.http.delete(`${this.routeAPI}/RoutesVehicles/${id}`);
 }
 
 export interface Routes {
   id?: number;
-  descripcion: string;
+  description: string;
   driver_Id: number
   vehicle_Id: number;
   active: boolean;

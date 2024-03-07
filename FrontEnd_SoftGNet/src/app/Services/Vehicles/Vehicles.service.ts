@@ -16,16 +16,16 @@ export class VehiclesService {
 
   getVehiclesById = (id: number): Observable<any> => this.http.get<any>(`${this.routeAPI}/Vehicles/${id}`);
 
-  createVehicles = (Vehicles: Vehicles) => this.http.post(`${this.routeAPI}/Vehicles`, Vehicles);
+  createVehicles = (vehicles: Vehicles) => this.http.post(`${this.routeAPI}/Vehicles`, vehicles);
 
-  editVehicles = (id: number, Vehicles: Vehicles) => this.http.put(`${this.routeAPI}/Vehicles/${id}`, Vehicles);
+  editVehicles = (id: number, vehicles: Vehicles) => this.http.put(`${this.routeAPI}/Vehicles/${id}`, vehicles);
 
   deleteVehicles = (id: number) => this.http.delete(`${this.routeAPI}/Vehicles/${id}`);
 }
 
 export interface Vehicles {
   id?: number;
-  descripcion: string;
+  description: string;
   year: number;
   make: number;
   capacity: number;

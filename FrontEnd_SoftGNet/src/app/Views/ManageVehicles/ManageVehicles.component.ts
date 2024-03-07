@@ -32,7 +32,7 @@ export class ManageVehiclesComponent implements OnInit {
   initForm() {
     this.formVehicles = this.frmBuilder.group({
       id: [null],
-      descripcion: [null, Validators.required],
+      description: [null, Validators.required],
       year: [null, Validators.required],
       make: [null, Validators.required],
       capacity: [null, Validators.required],
@@ -52,7 +52,7 @@ export class ManageVehiclesComponent implements OnInit {
     if (data) {
       this.formVehicles.patchValue({
         id: data.id,
-        descripcion: data.descripcion,
+        description: data.description,
         year: data.year,
         make: data.make,
         capacity: data.capacity,
@@ -70,7 +70,7 @@ export class ManageVehiclesComponent implements OnInit {
   createVehicle() {
     this.load = true;
     let dataVehicle: Vehicles = {
-      descripcion: this.formVehicles.value.descripcion,
+      description: this.formVehicles.value.description,
       year: this.formVehicles.value.year,
       make: this.formVehicles.value.make,
       capacity: this.formVehicles.value.capacity,
@@ -91,7 +91,7 @@ export class ManageVehiclesComponent implements OnInit {
     this.load = true;
     let dataVehicle: Vehicles = {
       id: this.formVehicles.value.id,
-      descripcion: this.formVehicles.value.descripcion,
+      description: this.formVehicles.value.description,
       year: this.formVehicles.value.year,
       make: this.formVehicles.value.make,
       capacity: this.formVehicles.value.capacity,
