@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouteRoutingModule } from './route-routing.module';
+import { RtsRoutingModule } from './rts-routing.module';
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    RouteRoutingModule
+    RtsRoutingModule
   ]
 })
-export class RouteModule { }
+export class RtsModule { }

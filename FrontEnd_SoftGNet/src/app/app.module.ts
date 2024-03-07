@@ -22,13 +22,13 @@ import { HomeComponent } from './Views/home/home.component';
 import { SideBarComponent } from './Views/sideBar/sideBar.component';
 import { MegaMenuModule } from 'primeng/megamenu';
 import { ManageDriversComponent } from './Views/ManageDrivers/ManageDrivers.component';
-import { ManageRoutesComponent } from './Views/ManageRoutes/ManageRoutes.component';
 import { ManageSchedulerComponent } from './Views/ManageScheduler/ManageScheduler.component';
 import { ManageVehiclesComponent } from './Views/ManageVehicles/ManageVehicles.component';
 import { CardModule } from 'primeng/card';
 import { ToolbarModule } from 'primeng/toolbar';
 import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
+import { ManageRtsComponent } from './Views/ManageRts/ManageRts.component';
 
 @NgModule({
   declarations: [
@@ -37,9 +37,9 @@ import { DialogModule } from 'primeng/dialog';
     SideBarComponent,
     HomeComponent,
     ManageDriversComponent,
-    ManageRoutesComponent,
     ManageSchedulerComponent,
     ManageVehiclesComponent,
+    ManageRtsComponent
   ],
   imports: [
     BrowserModule,

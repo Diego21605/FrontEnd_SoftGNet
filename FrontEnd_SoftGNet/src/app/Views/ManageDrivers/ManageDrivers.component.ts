@@ -23,7 +23,7 @@ export class ManageDriversComponent implements OnInit {
     private msg: MessagesService,
     private driversService: DriversService,) {
       this.initForm();
-    }
+  }
 
   ngOnInit() {
     this.getDrivers();
