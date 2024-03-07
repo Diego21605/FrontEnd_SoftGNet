@@ -6,7 +6,7 @@
     </div>
 </div>
 
-<div class="title m-4">
+<div class="title  my-4">
     <h1>Administración de Horarios</h1>
 </div>
 
@@ -41,14 +41,17 @@
                 <th><input pInputText type="text" style="width: 100%;" (input)="filterData($event, 'to')"></th>
                 <th><input pInputText type="text" style="width: 100%;" (input)="filterData($event, 'active')"></th>
                 <th></th>
+                <th></th>
             </tr>
             <tr>
-                <th>Id</th>
-                <th>Ruta</th>
-                <th>Semana</th>
-                <th>Desde</th>
-                <th>Hasta</th>
-                <th>Estado</th>
+                <th class="text-center">Id</th>
+                <th class="text-center">Ruta</th>
+                <th class="text-center">Semana</th>
+                <th class="text-center">Desde</th>
+                <th class="text-center">Hasta</th>
+                <th class="text-center">Estado</th>
+                <th class="text-center">Editar</th>
+                <th class="text-center">Eliminar</th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-data let-rowIndex="rowIndex">
@@ -59,11 +62,9 @@
                 <td class="text-center">{{data.week_Num}}</td>
                 <td class="text-center">{{data.from | date : 'yyyy-MM-dd'}}</td>
                 <td class="text-center">{{data.to | date : 'yyyy-MM-dd'}}</td>
-                <td class="text-center"><span class="badge" [ngClass]="{'bg-danger1': data.active == false, 'bg-success1': data.active == true}">{{data.active == true ? 'Activo' : 'Inactivo'}}</span></td>
-                <td>
-                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mx-2" (click)="showModalSchduler(data)"></button>
-                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning mx-2" (click)="deletedataScheduler(data.id)"></button>
-                </td>
+                <td class="text-center"><span class="badge" [ngClass]="{'bg-danger': data.active == false, 'bg-success': data.active == true}">{{data.active == true ? 'Activo' : 'Inactivo'}}</span></td>
+                <td><button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mx-2" (click)="showModalSchduler(data)"></button></td>
+                <td><button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning mx-2" (click)="deletedataScheduler(data.id)"></button></td>
             </tr>
         </ng-template>
     </p-table>
