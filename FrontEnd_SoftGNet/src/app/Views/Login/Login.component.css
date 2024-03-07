@@ -1,0 +1,59 @@
+.background {
+  background: url("/assets/backgroundLogin.jpeg") no-repeat center;
+  height: 100%;
+  min-height: 100vh;
+  background-size: cover;
+  background-attachment: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: -5px;
+}
+
+p-password ::ng-deep div,
+p-password ::ng-deep div ::ng-deep input {
+  width: 100%;
+}
+
+.containerLogin {
+  background-color: #fffd;
+  width: 400px;
+  padding: 2%;
+  margin: auto;
+  border-radius: 3%;
+  border-color: rgba(240, 240, 240, 0.603);
+  border-style: solid;
+  -webkit-box-shadow: 1px 18px 60px -19px rgba(0, 0, 0);
+  -moz-box-shadow: 1px 18px 60px -19px rgba(0, 0, 0);
+  box-shadow: 1px 18px 60px -19px rgba(0, 0, 0);
+  padding: 8%;
+}
+
+.title {
+  color: #db4149;
+  font-family: "Inter var", sans-serif;
+  font-weight: bold;
+}
+
+.container-fluid {
+  display: flex;
+  align-items: center;
+}
+
+.col-md {
+  margin: 8% 0;
+}
+
+.mb-3 {
+  text-align: center;
+  width: 100%;
+}
+
+.inputPassword {
+  height: 50px;
+}
+
+.pi-eye,
+.pi-eye-slash {
+  cursor: pointer;
+}
