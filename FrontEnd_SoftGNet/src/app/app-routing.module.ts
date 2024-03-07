@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: 'drivers', loadChildren: () => import('./Modules/Drivers/driver.module').then(m => m.DriverModule) },
   { path: 'routes', loadChildren: () => import('./Modules/Route/route.module').then(m => m.RouteModule) },
   { path: 'scheduler', loadChildren: () => import('./Modules/Scheduler/scheduler.module').then(m => m.SchedulerModule) },
-  { path: 'vehicules', loadChildren: () => import('./Modules/Vehicules/vehicule.module').then(m => m.VehiculeModule) },
+  { path: 'vehicules', loadChildren: () => import('./Modules/Vehicles/vehicle.module').then(m => m.VehicleModule) },
 ];
 
 @NgModule({

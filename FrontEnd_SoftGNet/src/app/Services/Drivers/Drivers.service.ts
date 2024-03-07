@@ -25,14 +25,14 @@ export class DriversService {
 }
 
 export interface Driver {
-  Id?: number;
-  Last_name: string;
-  First_name: string;
-  Ssn: string;
-  Dob: Date;
-  Address: string;
-  City: string;
-  Zip: string;
-  Phone: number;
-  Active: boolean;
+  id?: number;
+  last_name: string;
+  first_name: string;
+  ssn: string;
+  dob: Date;
+  address: string;
+  city: string;
+  zip: string;
+  phone: number;
+  active: boolean;
 }

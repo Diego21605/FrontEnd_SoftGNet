@@ -14,7 +14,7 @@ export class MessagesService {
   
   errorHttp = (message: string, error: HttpErrorResponse) => this.error(message, `Error: ${error.statusText} | Status: ${error.status}`);
 
-  warning = (title: string, details: string = '', time: number = 3000) => this.messageService.add({severity:'error', summary: title, detail: details, life: time });
+  warning = (title: string, details: string = '', time: number = 3000) => this.messageService.add({severity:'warning', summary: title, detail: details, life: time });
 
-  sucess = (title: string, details: string = '', time: number = 3000) => this.messageService.add({severity:'error', summary: title, detail: details, life: time });
+  sucess = (title: string, details: string = '', time: number = 3000) => this.messageService.add({severity:'success', summary: title, detail: details, life: time });
 }

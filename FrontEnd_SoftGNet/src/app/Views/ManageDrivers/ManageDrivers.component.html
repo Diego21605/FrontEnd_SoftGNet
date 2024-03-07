@@ -14,7 +14,7 @@
     <p-toolbar styleClass="mb-4 gap-2">
         <ng-template pTemplate="left">
             <button pButton pRipple label="Crear Conductor" icon="pi pi-plus" class="p-button-success mx-2" (click)="showModalDrivers()"></button>
-            <button pButton pRipple icon="pi pi-trash" class="p-button-danger mx-2"></button>
+            <button pButton pRipple label="Eliminar Todo" icon="pi pi-trash" class="p-button-danger mx-2" (click)="deleteAllDrivers()"></button>
         </ng-template>
     </p-toolbar>
 
@@ -22,7 +22,6 @@
     #tableDrivers 
     [value]="drivers" 
     [paginator]="true"
-    [(selection)]="selectedDrivers"
     [rowHover]="true" 
     [rows]="10" 
     [rowsPerPageOptions]="[10,20,30,50,70,100]"
@@ -30,12 +29,11 @@
     currentPageReportTemplate="Mostrando del {first} al {last} de {totalRecords} registros"
     [showCurrentPageReport]="true" 
     [scrollable]="true" 
-    scrollHeight="50rem">
+    scrollHeight="50rem"
+    *ngIf="!load">
         <ng-template pTemplate="header">
             <tr>
-                <th>
-                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-                </th>
+                <th rowspan="2">#</th>
                 <th><input pInputText type="text" style="width: 100%;" (input)="filterData($event, 'Id')"></th>
                 <th><input pInputText type="text" style="width: 100%;" (input)="filterData($event, 'Last_name')"></th>
                 <th><input pInputText type="text" style="width: 100%;" (input)="filterData($event, 'First_name')"></th>
@@ -49,7 +47,6 @@
                 <th></th>
             </tr>
             <tr>
-                <th>#</th>
                 <th>Id</th>
                 <th>Apellido</th>
                 <th>Nombre</th>
@@ -62,11 +59,9 @@
                 <th>Estado</th>
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-data>
+        <ng-template pTemplate="body" let-data let-rowIndex="rowIndex">
             <tr>
-                <td>
-                    <p-tableCheckbox [value]="data"></p-tableCheckbox>
-                </td>
+                <td>{{rowIndex + 1}}</td>
                 <td>{{data.id}}</td>
                 <td>{{data.last_name | uppercase}}</td>
                 <td>{{data.first_name | uppercase}}</td>
@@ -76,10 +71,10 @@
                 <td>{{data.city | uppercase}}</td>
                 <td>{{data.zip | uppercase}}</td>
                 <td>{{data.phone}}</td>
-                <td class="text-center"><span class="badge" [ngClass]="{'bg-danger1': data.Active == 1, 'bg-success1': data.Active == 0}">{{data.Active == 1 ? 'Activo' : 'Inactivo'}}</span></td>
+                <td class="text-center"><span class="badge" [ngClass]="{'bg-danger1': data.active == 1, 'bg-success1': data.active == 0}">{{data.active == 1 ? 'Activo' : 'Inactivo'}}</span></td>
                 <td>
                     <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mx-2" (click)="showModalDrivers(data)"></button>
-                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning mx-2"></button>
+                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning mx-2" (click)="deleteDriver(data.id)"></button>
                 </td>
             </tr>
         </ng-template>
@@ -140,8 +135,8 @@
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
                     <span class="p-float-label">
-                        <input pInputText formControlName="Phone" id="Phone"/>
-                        <label id="Phone">Telefono</label>
+                        <p-inputNumber formControlName="Phone" inputId="Phone" [useGrouping]="false" [required]="true"></p-inputNumber>
+                        <label for="Phone">Telefono</label>
                     </span>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">

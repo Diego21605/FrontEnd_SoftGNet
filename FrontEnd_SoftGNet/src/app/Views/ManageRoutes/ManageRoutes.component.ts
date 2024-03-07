@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ManageRoutesComponent implements OnInit {
 
+  load : boolean = false;
+  
   constructor() { }
 
   ngOnInit() {

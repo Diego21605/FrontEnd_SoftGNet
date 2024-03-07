@@ -1,0 +1,120 @@
+<app-sideBar></app-sideBar>
+
+<div class="d-flex justify-content-center overlay" *ngIf="load">
+    <div style="margin: auto;">
+        <p-progressSpinner></p-progressSpinner>
+    </div>
+</div>
+
+<div class="title m-4">
+    <h1>Información de Vehiculos</h1>
+</div>
+
+<p-card>
+    <p-toolbar styleClass="mb-4 gap-2">
+        <ng-template pTemplate="left">
+            <button pButton pRipple label="Crear Vehiculo" icon="pi pi-plus" class="p-button-success mx-2" (click)="showModalVehicles()"></button>
+            <button pButton pRipple label="Eliminar Todo" icon="pi pi-trash" class="p-button-danger mx-2" (click)="deleteAllVehicles()"></button>
+        </ng-template>
+    </p-toolbar>
+
+    <p-table 
+    #tableDrivers 
+    [value]="vehicles" 
+    [paginator]="true"
+    [rowHover]="true" 
+    [rows]="10" 
+    [rowsPerPageOptions]="[10,20,30,50,70,100]"
+    dataKey="id" 
+    currentPageReportTemplate="Mostrando del {first} al {last} de {totalRecords} registros"
+    [showCurrentPageReport]="true" 
+    [scrollable]="true" 
+    scrollHeight="50rem"
+    *ngIf="!load">
+        <ng-template pTemplate="header">
+            <tr>
+                <th rowspan="2">#</th>
+                <th><input pInputText type="text" style="width: 100%;" (input)="filterData($event, 'id')"></th>
+                <th><input pInputText type="text" style="width: 100%;" (input)="filterData($event, 'descripcion')"></th>
+                <th><input pInputText type="text" style="width: 100%;" (input)="filterData($event, 'year')"></th>
+                <th><input pInputText type="text" style="width: 100%;" (input)="filterData($event, 'make')"></th>
+                <th><input pInputText type="text" style="width: 100%;" (input)="filterData($event, 'capacity')"></th>
+                <th><input pInputText type="text" style="width: 100%;" (input)="filterData($event, 'active')"></th>
+                <th></th>
+            </tr>
+            <tr>
+                <th>Id</th>
+                <th>Descripción</th>
+                <th>Año</th>
+                <th>Hecho</th>
+                <th>Capacidad</th>
+                <th>Estado</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-data let-rowIndex="rowIndex">
+            <tr>
+                <td>{{rowIndex + 1}}</td>
+                <td>{{data.id}}</td>
+                <td>{{data.descripcion | uppercase}}</td>
+                <td>{{data.year | number: '1.2-2'}}</td>
+                <td>{{data.make | number: '1.2-2'}}</td>
+                <td>{{data.capacity | number: '1.2-2'}}</td>
+                <td class="text-center"><span class="badge" [ngClass]="{'bg-danger1': data.active == false, 'bg-success1': data.active == true}">{{data.active == true ? 'Activo' : 'Inactivo'}}</span></td>
+                <td>
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mx-2" (click)="showModalVehicles(data)"></button>
+                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning mx-2" (click)="deleteVehicle(data.id)"></button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</p-card>
+
+<p-dialog [(visible)]="modalVehicles" [style]="{ width: '70%', height: '90%' }" header="Detalles" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <form [formGroup]="formVehicles" (ngSubmit)="validateVehicles()">
+            <div class="row g-4 my-4">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                    <span class="p-float-label">
+                        <input pInputText formControlName="id" id="id"/>
+                        <label id="id">Id</label>
+                    </span>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+                    <span class="p-float-label">
+                        <input pInputText formControlName="descripcion" id="name"/>
+                        <label id="name">Descripción</label>
+                    </span>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                    <span class="p-float-label">
+                        <p-inputNumber formControlName="year" inputId="year" [useGrouping]="false" [required]="true"></p-inputNumber>
+                        <label for="year">Año</label>
+                    </span>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                    <span class="p-float-label">
+                        <p-inputNumber formControlName="make" inputId="make" [useGrouping]="false" [required]="true"></p-inputNumber>
+                        <label for="make">Hecho</label>
+                    </span>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                    <span class="p-float-label">
+                        <p-inputNumber formControlName="capacity" inputId="capacity" [useGrouping]="false" [required]="true"></p-inputNumber>
+                        <label for="capacity">Capacidad</label>
+                    </span>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                    <span class="p-float-label">
+                        <p-dropdown [options]="states" formControlName="active" optionLabel="Name" optionValue="Id" inputId="float-label"></p-dropdown>
+                        <label for="float-label">Estado</label>
+                    </span>
+                </div>
+            </div>
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                <button pButton class="p-button-danger" type="submit" label="Enviar Datos" icon="pi pi-send" [disabled]="load"></button>
+                <button pButton class="p-button-secondary" type="button" label="Limpiar Campos" icon="pi pi-eraser" [disabled]="load" (click)="this.formVehicles.reset()"></button>
+            </div>
+        </form>
+    </ng-template>
+</p-dialog>
