@@ -4,6 +4,8 @@ import { Vehicles, VehiclesService } from '../../Services/Vehicles/Vehicles.serv
 import { MessagesService } from '../../Services/Messages/Messages.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Table } from 'primeng/table';
+import { States } from '../../Interfaces/States';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-ManageVehicles',
@@ -21,7 +23,8 @@ export class ManageVehiclesComponent implements OnInit {
   
   constructor(private frmBuilder: FormBuilder,
     private vehiclesService: VehiclesService,
-    private msg: MessagesService,) {
+    private msg: MessagesService,
+    private messageService: MessageService,) {
     this.initForm();
   }
 
@@ -112,6 +115,7 @@ export class ManageVehiclesComponent implements OnInit {
 
   deleteVehicle(id: number) {
     this.load = true;
+    this.onReject();
     this.vehiclesService.deleteVehicles(id).subscribe(() => {
       this.msg.sucess(`¡Se ha elimado el conductor!`);
       setTimeout(() => this.getVehicles(), 1000);
@@ -123,6 +127,7 @@ export class ManageVehiclesComponent implements OnInit {
 
   deleteAllVehicles() {
     this.load = true;
+    this.onReject();
     let count: number = 0;
     if (this.vehicles.length > 0) {
       this.vehicles.forEach(d => {
@@ -144,11 +149,15 @@ export class ManageVehiclesComponent implements OnInit {
     }
   }
 
-  filterData = ($event : any, campo : any) => this.tableVehicules!.filter(($event.target as HTMLInputElement).value, campo, 'contains');
+  showElection(single: boolean, id?: number) {
+    if (single) this.formVehicles.patchValue({ id: id });
+    else this.formVehicles.reset();
+    let msg: string = single ? `El registro se eliminará ¿Desea continuar?` : `Se eliminarán todos los registros ¿Desea continuar?`;
+    this.messageService.add({ severity: 'warn', key: 'decision', summary: msg, sticky: true });
+  }
 
-}
+  onReject = () => this.messageService.clear('decision');
 
-interface States {
-  Id: number;
-  Name: string;
+  filterData = ($event : any, field : any) => this.tableVehicules!.filter(($event.target as HTMLInputElement).value, field, 'contains');
+
 }

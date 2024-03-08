@@ -28,21 +28,25 @@ export class SideBarComponent implements OnInit {
       {
         label: 'Horarios',
         icon: 'pi pi-calendar-plus',
-        command : () => {
-          this.router.navigateByUrl('/scheduler');
-        },
+        command : () => this.router.navigateByUrl('/scheduler'),
       },
       {
         label: 'Rutas',
         icon: 'pi pi-directions',
-        command : () => {
-          this.router.navigateByUrl('/rts-vehicles');
-        },
+        command : () => this.router.navigateByUrl('/rts-vehicles'),
       },
       {
         label: 'Vehiculos',
         icon: 'pi pi-car',
         command : () => this.router.navigateByUrl('/vehicules'),
+      },
+      {
+        label: 'Salir',
+        icon: 'pi pi-sign-out',
+        command : () => {
+          localStorage.clear();
+          this.router.navigateByUrl('/login');
+        },
       },
     ];
   }
