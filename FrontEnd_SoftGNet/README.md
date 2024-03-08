@@ -1,27 +1,34 @@
-# FrontEndSoftGNet
+# Proyecto de Gestión de Transporte
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.5.
+Este proyecto fue generado con Angular CLI versión 17.0.0.
 
-## Development server
+## Descripción
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Este es un proyecto basado en el manejo de una empresa de transporte. En esta página web se podrán crear, editar y eliminar conductores, vehículos, rutas y horarios o programaciones.
 
-## Code scaffolding
+## Autenticación
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+El proyecto utiliza Tokens para la verificación del usuario e inicio de sesión.
 
-## Build
+## Librerías
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Este proyecto utiliza librerías como Bootstrap y PrimeNg.
 
-## Running unit tests
+## Instalación
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Sigue estos pasos para instalar el proyecto:
 
-## Running end-to-end tests
+1. Clona el repositorio: `git clone https://github.com/Diego21605/FrontEnd_SoftGNet.git`
+2. Navega al directorio del proyecto: `cd tu-repositorio`
+3. Instala las dependencias: `npm install`
+4. Inicia el servidor de desarrollo: `ng serve`
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Abre `http://localhost:4200/` en tu navegador para ver la aplicación.
 
-## Further help
+## Construcción
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Ejecuta `ng build` para construir el proyecto. Los artefactos de construcción se almacenarán en el directorio `dist/`. Usa la opción `--prod` para una construcción de producción.
+
+## Ayuda
+
+Para obtener más ayuda sobre Angular CLI, usa `ng help` o visita el Angular CLI README.
