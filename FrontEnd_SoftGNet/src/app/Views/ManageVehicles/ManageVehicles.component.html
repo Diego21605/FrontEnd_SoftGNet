@@ -14,12 +14,13 @@
     <p-toolbar styleClass="mb-4 gap-2">
         <ng-template pTemplate="left">
             <button pButton pRipple label="Crear Vehiculo" icon="pi pi-plus" class="p-button-success mx-2" (click)="showModalVehicles()"></button>
-            <button pButton pRipple label="Eliminar Todo" icon="pi pi-trash" class="p-button-danger mx-2" (click)="deleteAllVehicles()"></button>
+            <button pButton pRipple label="Eliminar Todo" icon="pi pi-trash" class="p-button-danger mx-2" (click)="showElection(false)"></button>
         </ng-template>
     </p-toolbar>
 
     <p-table 
     #tableVehicules 
+    styleClass="p-datatable-sm"
     [value]="vehicles" 
     [paginator]="true"
     [rowHover]="true" 
@@ -59,12 +60,12 @@
                 <td class="text-center">{{rowIndex + 1}}</td>
                 <td class="text-center">{{data.id}}</td>
                 <td class="text-center">{{data.description | uppercase}}</td>
-                <td class="text-center">{{data.year | number: '1.2-2'}}</td>
-                <td class="text-center">{{data.make | number: '1.2-2'}}</td>
-                <td class="text-center">{{data.capacity | number: '1.2-2'}}</td>
+                <td class="text-center">{{data.year | number}}</td>
+                <td class="text-center">{{data.make | number}}</td>
+                <td class="text-center">{{data.capacity | number}}</td>
                 <td class="text-center"><span class="badge" [ngClass]="{'bg-danger': data.active == false, 'bg-success': data.active == true}">{{data.active == true ? 'Activo' : 'Inactivo'}}</span></td>
                 <td><button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mx-2" (click)="showModalVehicles(data)"></button></td>
-                <td><button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning mx-2" (click)="deleteVehicle(data.id)"></button></td>
+                <td><button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning mx-2" (click)="showElection(true, data.id)"></button></td>
             </tr>
         </ng-template>
     </p-table>
@@ -119,3 +120,24 @@
         </form>
     </ng-template>
 </p-dialog>
+
+<p-toast position="center" key="decision" (onClose)="onReject()" [baseZIndex]="5000">
+    <ng-template let-message pTemplate="message" let-matPrima>
+      <div class="flex flex-column" style="flex: 1">
+        <div class="text-center">
+          <i class="pi pi-exclamation-triangle font-size-48"></i>
+          <h4>{{message.summary}}</h4>
+          <p>{{message.detail}}</p>
+        </div>
+        <div class="p-fluid" style="display: flex;">
+          <div class="col-6" style="margin-right: 5px;">
+            <button *ngIf="formVehicles.value.id" type="button" pButton icon="pi pi-check" label="Si" (click)="deleteVehicle(formVehicles.value.id)" class="p-button-warning"></button>
+            <button *ngIf="!formVehicles.value.id" type="button" pButton icon="pi pi-check" label="Si" (click)="deleteAllVehicles()" class="p-button-success"></button>
+          </div>
+          <div class="col-6">
+            <button type="button" pButton (click)="onReject()" icon="pi pi-times" label="No" class="p-button-secondary"></button>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+</p-toast>

@@ -5,6 +5,8 @@ import { Routes, RoutesService } from '../../Services/Route/Routes.service';
 import { MessagesService } from '../../Services/Messages/Messages.service';
 import { Scheduler, SchedulerService } from '../../Services/Scheduler/Scheduler.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { States } from '../../Interfaces/States';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-ManageScheduler',
@@ -25,7 +27,8 @@ export class ManageSchedulerComponent implements OnInit {
   constructor(private frmBuilder: FormBuilder,
     private msg: MessagesService,
     private routesService: RoutesService,
-    private schedulerService: SchedulerService,) {
+    private schedulerService: SchedulerService,
+    private messageService: MessageService,) {
     this.initForm();
   }
 
@@ -61,7 +64,7 @@ export class ManageSchedulerComponent implements OnInit {
     }, () => this.load = false);
   }
 
-  showModalSchduler(data?: any) {
+  showModalSchduler(data?: Scheduler) {
     if (data) {
       this.formScheduler.patchValue({
         id: data.id,
@@ -125,6 +128,7 @@ export class ManageSchedulerComponent implements OnInit {
 
   deletedataScheduler(id: number) {
     this.load = true;
+    this.onReject();
     this.schedulerService.deleteSchedules(id).subscribe(() => {
       this.msg.sucess(`¡Se ha elimado el horario!`);
       setTimeout(() => this.getSchduler(), 1000);
@@ -136,6 +140,7 @@ export class ManageSchedulerComponent implements OnInit {
 
   deleteAllScheduler() {
     this.load = true;
+    this.onReject();
     let count: number = 0;
     if (this.scheduler.length > 0) {
       this.scheduler.forEach(d => {
@@ -157,11 +162,15 @@ export class ManageSchedulerComponent implements OnInit {
     }
   }
 
-  filterData = ($event : any, campo : any) => this.tableScheduler!.filter(($event.target as HTMLInputElement).value, campo, 'contains');
+  showElection(single: boolean, id?: number) {
+    if (single) this.formScheduler.patchValue({ id: id });
+    else this.formScheduler.reset();
+    let msg: string = single ? `El registro se eliminará ¿Desea continuar?` : `Se eliminarán todos los registros ¿Desea continuar?`;
+    this.messageService.add({ severity: 'warn', key: 'decision', summary: msg, sticky: true });
+  }
 
-}
+  onReject = () => this.messageService.clear('decision');
 
-interface States {
-  Id: number;
-  Name: string;
+  filterData = ($event : any, field : any) => this.tableScheduler!.filter(($event.target as HTMLInputElement).value, field, 'contains');
+
 }

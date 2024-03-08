@@ -6,6 +6,8 @@ import { Driver, DriversService } from '../../Services/Drivers/Drivers.service';
 import { MessagesService } from '../../Services/Messages/Messages.service';
 import { Routes, RoutesService } from '../../Services/Route/Routes.service';
 import { Vehicles, VehiclesService } from '../../Services/Vehicles/Vehicles.service';
+import { States } from '../../Interfaces/States';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-ManageRts',
@@ -27,7 +29,8 @@ export class ManageRtsComponent implements OnInit {
     private msg: MessagesService,
     private routesService: RoutesService,
     private driversService: DriversService,
-    private vehiclesService: VehiclesService,) {
+    private vehiclesService: VehiclesService,
+    private messageService: MessageService,) {
       this.initForm();
   }
 
@@ -71,7 +74,7 @@ export class ManageRtsComponent implements OnInit {
     }, () => this.load = false);
   }
 
-  showModalRoutes(data?: any) {
+  showModalRoutes(data?: Routes) {
     if (data) {
       this.formRoute.patchValue({
         id: data.id,
@@ -132,6 +135,7 @@ export class ManageRtsComponent implements OnInit {
 
   deleteRoute(id: number) {
     this.load = true;
+    this.onReject();
     this.routesService.deleteRoute(id).subscribe(() => {
       this.msg.sucess(`¡Se ha elimado la ruta!`);
       setTimeout(() => this.getRoutesVehicles(), 1000);
@@ -143,6 +147,7 @@ export class ManageRtsComponent implements OnInit {
 
   deleteAllRoutes() {
     this.load = true;
+    this.onReject();
     let count: number = 0;
     if (this.routesVehicles.length > 0) {
       this.routesVehicles.forEach(d => {
@@ -164,11 +169,15 @@ export class ManageRtsComponent implements OnInit {
     }
   }
 
-  filterData = ($event : any, campo : any) => this.tableRoutes!.filter(($event.target as HTMLInputElement).value, campo, 'contains');
+  showElection(single: boolean, id?: number) {
+    if (single) this.formRoute.patchValue({ id: id });
+    else this.formRoute.reset();
+    let msg: string = single ? `El registro se eliminará ¿Desea continuar?` : `Se eliminarán todos los registros ¿Desea continuar?`;
+    this.messageService.add({ severity: 'warn', key: 'decision', summary: msg, sticky: true });
+  }
 
-}
+  onReject = () => this.messageService.clear('decision');
 
-interface States {
-  Id: number;
-  Name: string;
+  filterData = ($event : any, field : string) => this.tableRoutes!.filter(($event.target as HTMLInputElement).value, field, 'contains');
+
 }

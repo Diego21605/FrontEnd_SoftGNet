@@ -133,7 +133,7 @@ form .button button {
 
 .p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
   border-color: #fd9393;
-  color: var(--rojo);
+  color: #db4149;
 }
 
 .p-tabview .p-tabview-nav-btn.p-link {
@@ -240,50 +240,18 @@ p-calendar span button span {
 }
 
 p-calendar span button {
-  background-color: var(--rojo);
+  background-color: #db4149;
   border: 0;
   transition: all 1s;
 }
 
 .p-datepicker-buttonbar button {
   background-color: transparent;
-  color: var(--rojo);
-}
-
-.p-button.p-button-text:enabled:hover {
-  background: rgb(246 59 59 / 4%);
-  border-color: transparent;
-}
-
-p-calendar span .p-datepicker-trigger:hover {
-  background: var(--rojoHover);
-}
-
-p-calendar .p-datepicker-header button {
-  background: #fff0;
-}
-
-p-calendar .p-datepicker-header button:hover {
-  background: #fff0;
-}
-
-.p-datepicker table td.p-datepicker-today>span {
-  background: #dacece;
-  color: #495057;
-  border-color: transparent;
-}
-
-.p-datepicker:not(.p-disabled) table td span:not(.p-highlight):not(.p-disabled):hover {
-  background: #efe9e9;
-}
-
-.p-datepicker table td>span.p-highlight {
-  color: #d81d1d;
-  background: #ffefef;
+  color: #db4149;
 }
 
 p-dialog .p-dialog-header span {
-  color: var(--rojo);
+  color: #db4149;
   align-items: center;
 }
 
